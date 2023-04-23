@@ -14,7 +14,7 @@ const Cart = () => {
           </div>
         </div>
 
-        {/* <div className="flex flex-col lg:flex-row gap-12 py-10">
+        <div className="flex flex-col lg:flex-row gap-12 py-10">
           <div className="flex-[2]">
             <div className="text-lg font-bold">Cart Items</div>
             <CartItem />
@@ -39,13 +39,16 @@ const Cart = () => {
                 include delivery costs and international transaction fees.
               </div>
             </div>
-            <button className="w-full py-4 rounded-full bg-black text-white text-lg font-medium transition-transform active:scale-95 mb-3 hover:opacity-75 flex items-center gap-2 justify-center">
-              Checkout
-            </button>
+            <Link href="/success">
+              <button className="w-full py-4 rounded-full bg-black text-white text-lg font-medium transition-transform active:scale-95 mb-3 hover:opacity-75 flex items-center gap-2 justify-center">
+                Checkout
+              </button>
+            </Link>
           </div>
-        </div> */}
+        </div>
 
-        <div className="flex-[2] flex flex-col items-center pb-[50px]">
+        {/* Empty cart */}
+        {/* <div className="flex-[2] flex flex-col items-center pb-[50px]">
           <Image
             src="/empty-cart.jpg"
             width={300}
@@ -65,7 +68,7 @@ const Cart = () => {
           >
             Continue Shopping
           </Link>
-        </div>
+        </div> */}
       </Wrapper>
     </div>
   )
