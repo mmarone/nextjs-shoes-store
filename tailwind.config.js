@@ -8,6 +8,7 @@ module.exports = {
     fontFamily: {
       oswald: 'Oswald, sans-serif',
       urbanist: 'Urbanist, sans-serif',
+      pacifico: 'Pacifico, sans-serif',
     },
     extend: {},
   },
