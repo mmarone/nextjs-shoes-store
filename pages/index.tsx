@@ -4,10 +4,10 @@ import ProductCard from '@/components/ProductCard'
 import Wrapper from '@/components/Wrapper'
 import { fetchData } from '@/utils/api'
 
-import { Product } from '@/types'
+import { ProductResponse } from '@/types'
 
 interface Props {
-  products: Product[]
+  products: ProductResponse
 }
 
 export default function Home({ products }: Props) {
@@ -26,7 +26,7 @@ export default function Home({ products }: Props) {
           </div>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 my-14 px-5 md:px-0">
-          {products.map((product) => (
+          {products.data.map((product) => (
             <ProductCard key={product?.id} product={product} />
           ))}
         </div>
@@ -36,7 +36,7 @@ export default function Home({ products }: Props) {
 }
 
 export async function getStaticProps() {
-  const products = await fetchData<Product[]>('products')
+  const products = await fetchData<ProductResponse>('products')
 
   return {
     props: { products },

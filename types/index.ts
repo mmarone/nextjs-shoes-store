@@ -16,3 +16,8 @@ export interface Category {
   name: string
   docCount: number
 }
+
+export interface ProductResponse {
+  data: Product[]
+  total: number
+}
