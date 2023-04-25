@@ -27,7 +27,7 @@ const ProductDetails = ({ relatedProducts, product }: Props) => {
             <ProductDetailsCarousel images={product.images} />
           </div>
           <div className="flex-[1] py-3">
-            <div className="text-[34px] font-semibold mb-2">{product.name}</div>
+            <div className="text-[34px] font-semibold leading-[1] mb-2">{product.name}</div>
             <div className="text-lg font-semibold mb-5">{product.subtitle}</div>
             <div>MRP: ${getNumberComma(product.price)}</div>
             <div className="text-md font-medium text-black/[0.5]">
@@ -121,8 +121,6 @@ export const getStaticProps: GetStaticProps = async (context) => {
   const productId = context.params?.productId as string
   const product = await fetchData<Product>(`products/${productId}`)
   const products = await fetchData<ProductResponse>(`products?limit=5&offset=0`)
-
-  console.log(products.data)
 
   return {
     props: {
