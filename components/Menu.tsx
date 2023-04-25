@@ -2,6 +2,7 @@ import React from 'react'
 import Link from 'next/link'
 
 import { BsChevronDown } from 'react-icons/bs'
+import { Category } from '@/types'
 
 const data = [
   { id: 1, name: 'Home', url: '/' },
@@ -17,12 +18,13 @@ const subMenuData = [
   { id: 4, name: 'Football shoes', docCount: 11 },
 ]
 
-interface MenuProps {
+interface Props {
   showCatMenu: boolean
   handleShowCatMenu: (value: boolean) => void
+  categories: Category[]
 }
 
-const Menu: React.FC<MenuProps> = ({ showCatMenu, handleShowCatMenu }) => {
+const Menu = ({ showCatMenu, handleShowCatMenu, categories }: Props) => {
   return (
     <ul className="hidden md:flex items-center gap-8 font-medium text-black">
       {data.map((item) => {
@@ -38,13 +40,13 @@ const Menu: React.FC<MenuProps> = ({ showCatMenu, handleShowCatMenu }) => {
                 <BsChevronDown size={14} />
                 {showCatMenu && (
                   <ul className="bg-white absolute top-6 left-0 min-w-[250px] px-1 py-1 text-black shadow-lg">
-                    {subMenuData.map((submenu) => {
+                    {categories?.map((category) => {
                       return (
-                        <Link key={submenu.id} href="/">
+                        <Link key={category.id} href={`/category/${category.id}`}>
                           <li className="h-12 flex justify-between items-center px-3 hover:bg-black/[0.03] rounded-md">
-                            {submenu.name}
+                            {category.name}
                             <span className="opacity-50 text-sm">
-                              {submenu.docCount}
+                              ({category.docCount})
                             </span>
                           </li>
                         </Link>

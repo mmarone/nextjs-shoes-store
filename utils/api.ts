@@ -1,6 +1,6 @@
 import { API_URL } from './urls'
 
-export const fetchData = async (endpoint: string) => {
+export const fetchData = async <T>(endpoint: string): Promise<T> => {
   const options = {
     method: 'GET',
   }

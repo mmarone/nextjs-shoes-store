@@ -11,7 +11,8 @@ export interface Product {
   categories: Category[]
 }
 
-interface Category {
+export interface Category {
   id: string
   name: string
+  docCount: number
 }
