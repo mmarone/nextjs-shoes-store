@@ -4,11 +4,15 @@ export interface Product {
   subtitle: string
   price: number
   description: string
-  size: object
+  size: Size
   images: string[]
   thumbnail: string
   originalPrice: number
   categories: Category[]
+}
+
+interface Size {
+  data: { size: string; enabled: boolean }[]
 }
 
 export interface Category {

@@ -11,7 +11,10 @@ interface Props {
 
 const ProductCard = ({ product }: Props) => {
   return (
-    <Link href={`/product/${product.id}`}>
+    <Link
+      href={`/product/${product.id}`}
+      className="transform overflow-hidden bg-white duration-200 hover:scale-105 cursor-pointer"
+    >
       <Image
         className="w-full"
         src={product.thumbnail}
