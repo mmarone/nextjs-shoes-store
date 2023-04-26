@@ -2,6 +2,9 @@ import { useState } from 'react'
 import { GetStaticPaths, GetStaticProps } from 'next'
 import { IoMdHeartEmpty } from 'react-icons/io'
 import ReactMarkdown from 'react-markdown'
+import { useSelector, useDispatch } from 'react-redux'
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 import Wrapper from '@/components/Wrapper'
 import ProductDetailsCarousel from '@/components/ProductDetailsCarousel'
@@ -9,6 +12,7 @@ import RelatedProducts from '@/components/RelatedProducts'
 import { Product, ProductResponse } from '@/types'
 import { fetchData } from '@/utils/api'
 import { getNumberComma } from '@/utils/helper'
+import { addToCart } from '@/store/cart/cartSlice'
 
 interface Props {
   relatedProducts: Product[]
@@ -18,16 +22,32 @@ interface Props {
 const ProductDetails = ({ relatedProducts, product }: Props) => {
   const [selectedSize, setSelectedSize] = useState('')
   const [showError, setShowError] = useState(false)
+  const dispatch = useDispatch()
+
+  const notify = () => {
+    toast.success('Success. Check your cart!', {
+      position: 'bottom-right',
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      draggable: true,
+      progress: undefined,
+      theme: 'dark',
+    })
+  }
 
   return (
     <div className="w-full md:py-20">
+      <ToastContainer />
       <Wrapper>
         <div className="flex flex-col lg:flex-row md:px-10 gap-[50px] lg:gap-[100px]">
           <div className="w-full md:w-auto flex-[1.5] max-w-[500px] lg:max-w-full mx-auto lg:mx-0">
             <ProductDetailsCarousel images={product.images} />
           </div>
           <div className="flex-[1] py-3">
-            <div className="text-[34px] font-semibold leading-[1] mb-2">{product.name}</div>
+            <div className="text-[34px] font-semibold leading-[1] mb-2">
+              {product.name}
+            </div>
             <div className="text-lg font-semibold mb-5">{product.subtitle}</div>
             <div>MRP: ${getNumberComma(product.price)}</div>
             <div className="text-md font-medium text-black/[0.5]">
@@ -76,6 +96,15 @@ const ProductDetails = ({ relatedProducts, product }: Props) => {
                     block: 'center',
                     behavior: 'smooth',
                   })
+                } else {
+                  dispatch(
+                    addToCart({
+                      ...product,
+                      selectedSize,
+                      oneQuantityPrice: product.price,
+                    }),
+                  )
+                  notify()
                 }
               }}
             >
